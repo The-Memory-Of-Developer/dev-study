@@ -16,19 +16,19 @@
 ### 🛠 주요 페이지
 
 - **메인 페이지** - 인기있는 스터디 모집 공고를 보여주는 메인페이지
-  ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/f9e91417-856f-4433-90f9-d93dff9187c1/Untitled.png)
+  <!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/f9e91417-856f-4433-90f9-d93dff9187c1/Untitled.png) -->
 - **모집공고 페이지** - 여러 모집공고를 확인하는 페이지
 
-  ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/b77c28d9-334f-40bc-8467-cc10c13c2fec/Untitled.png)
+  <!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/b77c28d9-334f-40bc-8467-cc10c13c2fec/Untitled.png) -->
 
 - **모집공고 상세 페이지** - 모집공고의 상세 내용을 확인하는 페이지
 
-  ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/41cde457-6247-438a-b32a-dd584514af82/Untitled.png)
+  <!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/41cde457-6247-438a-b32a-dd584514af82/Untitled.png) -->
 
 - **스터디 상태 페이지** - 진행중인 스터디의 상태를 관리하는 페이지
-  ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/13061197-0338-4c04-b162-01c5ac5b6719/Untitled.png)
+  <!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/13061197-0338-4c04-b162-01c5ac5b6719/Untitled.png) -->
 - **마이페이지** - 나의 스터디 정보를 보여주는 페이지
-  ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/e3f7b665-b68d-45b3-a08e-3d1db4ab3d8a/Untitled.png)
+  <!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/e3f7b665-b68d-45b3-a08e-3d1db4ab3d8a/Untitled.png) -->
 
 ## 💡 프로젝트 진행 시 발생한 문제
 
@@ -39,7 +39,7 @@
 
 ### 👿 발생한 문제
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/70c7c152-1df6-4ede-a14b-5cef8a375c33/Untitled.png)
+<!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/70c7c152-1df6-4ede-a14b-5cef8a375c33/Untitled.png) -->
 
 - 백엔드에서 API가 나올 때까지 기다려야 한다.
   ⇒ **백엔드 개발에 의존적**
@@ -74,7 +74,7 @@
 
 ## 💡 MSW 작동 원리
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/33a9742e-f4e1-467d-a16e-04175afecc29/Untitled.png)
+<!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/33a9742e-f4e1-467d-a16e-04175afecc29/Untitled.png) -->
 
 1. 브라우저가 Service Worker에 Request
 2. Service Worker가 해당 요청을 가로채서 복사
@@ -309,28 +309,28 @@ const Main = () => {
 
 ### 🛠 Service Worker 실행 여부 확인
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/c9720124-b71e-432b-9a79-6acdcf581679/Untitled.png)
+<!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/c9720124-b71e-432b-9a79-6acdcf581679/Untitled.png) -->
 
 - 개발자 도구의 Application 탭에서 확인한 결과, Service Worker가 잘 작동되고 있음을 확인
 
 ### 🛠  Mock Data의 전달 확인
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/ff329ea3-2b93-4e4b-a662-0eca56c899b5/Untitled.png)
+<!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/ff329ea3-2b93-4e4b-a662-0eca56c899b5/Untitled.png) -->
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/70767210-f391-44d2-ae7f-0651ec2b5223/Untitled.png)
+<!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/70767210-f391-44d2-ae7f-0651ec2b5223/Untitled.png) -->
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/6c232503-2a95-4e7f-ae52-6660d38ba4a7/Untitled.png)
+<!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/6c232503-2a95-4e7f-ae52-6660d38ba4a7/Untitled.png) -->
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/88fe22bd-1360-4dde-a1cd-04e635271409/Untitled.png)
+<!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/88fe22bd-1360-4dde-a1cd-04e635271409/Untitled.png) -->
 
 - 콘솔을 통해 MSW가 잘 작동되었음을 확인할 수 있다.
 - Worker로부터 Mock Response를 통해 인기 있는 모집공고 데이터를 가져온 것을 확인할 수 있다.
 
 ### 🛠  메인페이지 렌더링 결과
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/59cd531f-198c-4cff-83ed-a68cf85bd5a4/Untitled.png)
+<!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/59cd531f-198c-4cff-83ed-a68cf85bd5a4/Untitled.png) -->
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/46108c93-39e8-4208-b71d-f6ade06b46a9/Untitled.png)
+<!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/46108c93-39e8-4208-b71d-f6ade06b46a9/Untitled.png) -->
 
 - 받아온 데이터를 화면에 잘 보여주고 있는 것을 확인할 수 있다.
 

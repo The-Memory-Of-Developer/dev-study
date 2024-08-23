@@ -27,7 +27,7 @@ Application architecture for building user interfaces
 
 ### MVC 패턴이란
 
-<p align="center"><img width="600" src="./assets/mvc.png"></p>
+<p align="center"><img width="600" src="./assets/flux/mvc.png"></p>
 
 MVC는 사용자 인터페이스, 데이터 및 논리 제어를 구현하는데 널리 사용되는 소프트웨어 디자인 패턴으로
 비즈니스 로직과 화면을 구분하는데 중점을 두고 있습니다.
@@ -38,7 +38,7 @@ MVC는 사용자 인터페이스, 데이터 및 논리 제어를 구현하는데
 
 ### MVC 패턴의 한계
 
-<p align = "center"><img width="500" src="./assets/mvc-problem.png"></p>
+<p align = "center"><img width="500" src="./assets/flux/mvc-problem.png"></p>
 
 이러한 MVC 패턴은 소규모 application에서는 큰 문제가 발생하지 않습니다. 하지만 많은 Model과 View가 혼재되어 있는 대규모 애플리케이션에서는 다음과 같은 문제가 발생합니다.
 
@@ -50,7 +50,7 @@ MVC는 사용자 인터페이스, 데이터 및 논리 제어를 구현하는데
 
 ## Flux란
 
-<p align="center"><img width="600" src="./assets/flux.png"></p>
+<p align="center"><img width="600" src="./assets/flux/flux.png"></p>
 
 2014년 Hacker Way 컨퍼런스에서 Facebook이 MVC의 대안으로 제안한 Flux 아키텍처는 클라이언트 측 웹 애플리케이션을<br>구축하는 데 사용하는 애플리케이션 아키텍처입니다. Flux의 주요 특징은 **단방향 데이터 흐름(Unidirectional Data Flow)입니다.**
 

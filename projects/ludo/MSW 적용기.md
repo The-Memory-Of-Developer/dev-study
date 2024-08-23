@@ -1,122 +1,128 @@
-# 📓 MSW 적용 배경
+- [📓 MSW 적용 배경](#msw-적용-배경)
+  - [1. 벡엔드 API에 의존적인 프론트엔드 개발 일정](#1-벡엔드-api에-의존적인-프론트엔드-개발-일정)
+  - [2. 데이터를 내부 로직에 Mocking하는 방식의 한계](#2-데이터를-내부-로직에-mocking하는-방식의-한계)
+- [📓 MSW 정의와 Service Worker](#msw-정의와-service-worker)
+  - [1. MSW 정의](#1-msw-정의)
+  - [2. Service Worker](#2-service-worker)
+- [📓 MSW 동작 원리](#msw-동작-원리)
+- [📓 MSW 적용](#msw-적용)
+  - [📋 MSW 관련 폴더 및 파일 구조](#msw-관련-폴더-및-파일-구조)
+  - [⛏ MSW 적용 과정](#msw-적용-과정)
+  - [🎬 MSW 동작 확인](#msw-동작-확인)
+- [🤔 MSW 적용 소감](#msw-적용-소감)
+- [📓 참고자료](#참고자료)
 
-## 💡 진행중인 프로젝트 - 스터디 플랫폼
+[✔︎ 관련 PR - MSW를 활용한 Mocking 환경 구성](https://github.com/Ludo-SMP/ludo-frontend/pull/21)
 
-### 🛠 프로젝트 기획의도
+Ludo 프로젝트 초기에 MSW를 도입하고, 이를 활용한 과정을 정리한 글입니다.
 
-- **누구나 쉽고 빠르게 지속 가능한 스터디에 참여할 수 있는 플랫폼 개발**
-- **스터디 진행 사항도 관리할 수 있는 플랫폼 개발**
+## 📓 MSW 적용 배경
 
-### 🛠 프로젝트 주요 기능
+프로젝트 기획 및 디자인 시안이 도출되고, 이를 기반으로 주요 기능 및 API 명세가 정해 진 후, 본격적인 프론트엔드 개발이 진행되었습니다. 기능 구현에 앞서 프론트엔드 팀원간의 업무 분배를 진행하였고, 백엔드 API 개발 소요 시간을 고려하여 페이지 마크업 작업을 선행하였습니다. 또한 마크업 작업을 완료한 후, API의 응답으로 내려오게 될 데이터의 상태를 Application 내부 로직에 Mocking하여 기능 구현을 진행하였습니다. 이러한 방식으로 프론트엔드 개발을 진행하던 중 다음과 같은 문제를 마주치게 되었습니다.
 
-- 스터디 모집
-- 스터디 진행 상황 관리
-- 스터디 지원
+### 1. 벡엔드 API에 의존적인 프론트엔드 개발 일정
 
-### 🛠 주요 페이지
+<p align = "center"><img width="500" src="./assets/msw/timeline.png"/></p>
 
-- **메인 페이지** - 인기있는 스터디 모집 공고를 보여주는 메인페이지
-  <!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/f9e91417-856f-4433-90f9-d93dff9187c1/Untitled.png) -->
-- **모집공고 페이지** - 여러 모집공고를 확인하는 페이지
+백엔드 API 개발 일정에 의존적인 프론트엔드 개발을 진행함에 따라, 전체적인 개발 스케쥴이 정해져 있는 상황에서 프론트엔드 파트의 기능 구현, 리팩토링 및 유지 보수의 시간이 줄어들게 됩니다. 이는 곧 장기적인 관점에서 프로젝트의 퀄리티에 영향을 미칠 것이라 판단되었습니다.
 
-  <!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/b77c28d9-334f-40bc-8467-cc10c13c2fec/Untitled.png) -->
+### 2. 데이터를 내부 로직에 Mocking하는 방식의 한계
 
-- **모집공고 상세 페이지** - 모집공고의 상세 내용을 확인하는 페이지
+Application 내부 로직에 데이터의 상태를 Mocking하는 방식은 구현이 쉽고 빠르게 적용할 수 있다는 장점이 있었습니다. 하지만 서비스 로직을 수정하여 Mock Data를 넣어줌으로써, 나중에 실제 API를 연결할 때 기존에 작성한 코드 수정이 불가피했습니다. 뿐만 아니라 Mock Data를 넣는 방식으로는 다양한 HTTP 메서드 및 네트워크 응답 상태에 대해 대응하는데 한계가 있었습니다.
 
-  <!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/41cde457-6247-438a-b32a-dd584514af82/Untitled.png) -->
+이에 따라 다음과 같은 기준을 설정하고 해결방안을 모색했습니다.
 
-- **스터디 상태 페이지** - 진행중인 스터디의 상태를 관리하는 페이지
-  <!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/13061197-0338-4c04-b162-01c5ac5b6719/Untitled.png) -->
-- **마이페이지** - 나의 스터디 정보를 보여주는 페이지
-  <!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/e3f7b665-b68d-45b3-a08e-3d1db4ab3d8a/Untitled.png) -->
+- 실제 API를 사용하는 것처럼 네트워크 수준에서 Requset를 가로채 Mocking 할 수 있어야 한다.
+- HTTP 메서드 및 응답 상태에 따른 대응을 할 수 있어야한다.
+- Mocking 환경을 구축하는데 공수가 많이 들지 않아야한다.
+- 서비스 로직에 대한 수정이 필요없어야 한다.
 
-## 💡 프로젝트 진행 시 발생한 문제
+그 결과 이러한 기준을 충족하는 MSW를 프로젝트에 도입하게 되었습니다.
 
-### 🛠 맡은 역할
+## 📓 MSW 정의와 Service Worker
 
-- 메인페이지, 스터디 모집 공고 모아보기 페이지, 스터디 상태 페이지 등
-  ⇒ **데이터를 가져와서 처리하여, 화면에 보여주는 기능이 대부분인 페이지**
+### 1. MSW 정의
 
-### 👿 발생한 문제
+MSW 공식문서에는 MSW를 다음과 같이 정의하고 있습니다.
 
-<!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/70c7c152-1df6-4ede-a14b-5cef8a375c33/Untitled.png) -->
+> **Industry standard API mocking for JavaScript**
+> Mock Service Worker is an API mocking library that allows you to write client-agnostic mocks and reuse them across any frameworks, tools, and environments.
 
-- 백엔드에서 API가 나올 때까지 기다려야 한다.
-  ⇒ **백엔드 개발에 의존적**
-- 개발중에 추가 수정사항이 발생하면, 이러한 의존적인 프로세스를 반복하게 된다.
-  ⇒ **FE의 기능 개발 시간 및 테스트 시간 부족**
+이는 MSW는 **어느 클라이언트이든지 상관없이 mock을 작성 가능하며, 모든 프레임워크/Tool/환경에서 재사용 가능한 JS API Mocking 라이브러리**로 정리할 수 있습니다.
 
-### 🤔 해결 방안
+이렇게 MSW가 클라이언트에 상관없이 mock을 작성할 수 있는 이유는 무엇일까요? 그것은 바로 Service Worker를 사용하기 때문입니다.
 
-- 직접 MockData 설정한 상태로 개발 진행
-  ⇒ **이는 구현이 쉽다는 장점이 있지만, HTTP 메서드 및 응답 상태에 따른 대응이 쉽지 않다는 단점**
-- Mocking 서버를 구현하여 개발
-  ⇒ **구현하는데 시간이 소모되며, 실제 서버와 다른 방식으로 동작하여 기존 코드를 수정해야하는 상황 발생**
-- **MSW**
-  - 서비스 로직을 직접 수정할 필요 X
-  - 직접 모킹 서버를 구현할 필요 X
-  - 어플리케이션 레벨이 아닌 네트워크 레벨에서 요청을 가로채 응답을 보내기 때문에 모든 종류의 네트워크 라이브러리 (axios, react-query 등) 및 네이티브 fetch 메서드와 사용 가능
+### 2. Service Worker
 
-## ⇒ MSW 사용
+MSW는 풀네임인 Mock Service Worker에서 알 수 있듯이 Service Worker를 활용한 라이브러리입니다. Service Worker란 웹 애플리케이션의 메인 스레드 분리된 백그라운드 스레드에서 실행되는 스크립트로, 이로 인해 UI Block 없이 연산을 처리할 수 있습니다. 이로인해 백그라운드 동기화, 푸시 알림들의 기능을 구현할 때 사용됩니다.
 
-# 📓 MSW 원리
+뿐만 아니라 Service Worker는 fetch 이벤트를 통해 네트워크 요청을 가로채고, 이 요청을 캐시에서 제공하거나, 네트워크로 전달하거나, 요청을 수정할 수 있습니다. 이러한 기능을 수행하는 Service Worker를 MSW에 도입함으로써 실제 서버에서 response를 보낸 것처럼 Mocking을 구현할 수 있으며, 이러한 클라이언트와 Worker간의 관심사를 분리를 통해 클라이언트의 프레임워크/Tool/환경에 상관없는 mock을 작성할 수 있습니다. 이는 MSW를 개발자가 작성한 글에서 확인할 수 있습니다.
 
-## 💡 MSW(Mock Service Worker)란
+> Using a Service Worker means having no request client stubs *and* sending authentic responses from the network as if an actual server has sent them.
+>
+> This **separation of concerns** has clicked with me immediately because it provided me exactly what I was looking for: an interception algorithm that respects your application’s integrity. Moreover, by **separating the concerns** between the worker and the client, MSW is able to ship a snappy and reactive experience not affected by lazy worker updates or the worker’s life cycle phases.
+>
+> _- Artem Zakharchenko (MSW 개발자)_
+>
+> Service Worker를 사용하는 것은 request client stub이 없고 실제 서버가 보낸 것처럼 네트워크에서 실제 응답을 보내는 것을 의미합니다. 이러한 **_관심사의 분리(separation of concern)_**는 제가 찾던 것을 정확히 제공했기 때문에 저에게 즉시 적용되었습니다. 즉, 애플리케이션의 무결성을 존중하는 가로채기 알고리즘입니다. 게다가 MSW는 worker와 클라이언트 간의 **_관심사를_ 분리**함으로써 lazy worker update나 worker의 수명 주기 단계에 영향을 받지 않는 빠르고 반응성 있는 경험을 제공할 수 있습니다.
 
-- Service Worker를 이용해 서버를 향한 실제 네트워크 요청을 가로채서(intercept) 모의 응답을 보내주는 API Mocking 라이브러리
+## 📓 MSW 동작 원리
 
-### 🛠 Service Worker란
+<p align = "center"><img width="500" src="./assets/msw/process.png"/></p>
 
-- Service Worker는 브라우저가 백그라운드에서 실행하는 스크립트
-- 웹 서비스와 브라우저 및 네트워크 사이에서 프록시 서버역할
-- 웹 애플리케이션의 메인 스레드와 분리된 별도의 백그라운드 스레드에서 실행되어 애플리케이션의 UI 블록 없이 연산을 처리 가능
-  🔎 [Service Worker](https://developer.mozilla.org/ko/docs/Web/API/Service_Worker_API)
+Application에서 Service Worker 설치 및 등록이 완료된 후, MSW의 동작원리는 다음과 같습니다.
 
-## 💡 MSW 작동 원리
+1. Application(Browser)에서 서버에 request를 보냅니다. 이 때 Service Worker가 Request를 가로챕니다.
+2. Service Worker가 가로챈 request를 복사하여 MSW에 전달합니다.
+3. MSW에서 사용자가 정의한 handler와 request를 매칭하는 과정을 진행합니다.
+4. 매칭된 handler에서 반환하는 Mocked response(모의 응답)을 Service Worker에게 전달합니다.
+5. Service Worker가 Mocked Response를 Application(Browser)에 전달합니다.
 
-<!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/33a9742e-f4e1-467d-a16e-04175afecc29/Untitled.png) -->
+## 📓 MSW 적용
 
-1. 브라우저가 Service Worker에 Request
-2. Service Worker가 해당 요청을 가로채서 복사
-3. 서버에 요청을 보내지 않고, 사용자가 작성한 MSW 라이브러리의 handler와 매칭
-4. MSW가 등록된 handler에서 Mocked response(모의 응답)를 Service Worker에게 전달
-5. Service Worker가 Mocked Response를 브라우저에게 전달
+MSW의 동작원리를 학습한 후, 실제로 MSW를 적용하는 과정을 진행했습니다.
 
-# 📓 MSW 적용
+여러 기능을 구현하는 데 MSW를 적용하였으며, 본 글에서는 메인페이지에서 인기 모집공고를 불러오는 request에 대한 mocking한 과정을 설명하겠습니다.
 
-## 💡 MSW 설정
-
-- 메인페이지에서 인기있는 모집공고를 가져오는 API Mocking 작성
+먼저 관련 폴더 및 파일 구조는 다음과 같습니다.
 
 ### 📋 MSW 관련 폴더 및 파일 구조
 
-```bash
+```
 -- public
-    -- mockServiceWorker.js => **Service Worker 파일**
-		-- index.html
+  -- mockServiceWorker.js => **Service Worker 파일**
+  -- index.html
 -- src
-  	-- mocks
-			  -- data => **Mock Data**
-			  -- handlers => **Mock Response를 반환하는 handler**
-			  -- uitls => **Mock Data를 변환하는 uitil 함수**
-			  -- browser.ts => **worker Instance 생성 파일**
-    -- App.tsx => **Root Component**
-    -- index.tsx => **Entry point**
+  -- mocks
+    -- data => **Mock Data**
+    -- handlers => **Mock Response를 반환하는 handler**
+    -- uitls => **Mock Data를 변환하는 uitil 함수**
+    -- browser.ts => **worker Instance 생성 파일**
+  -- App.tsx => **Root Component**
+  -- index.tsx => **Entry point**
 ```
 
-### 🛠 MSW 라이브러리 설치
+### ⛏ MSW 적용 과정
+
+1.&nbsp;**MSW 라이브러리 설치**
+
+먼저 MSW 라이브러리를 설치합니다.
 
 ```bash
 yarn add msv --dev
 ```
 
-### 🛠 Service Worker 등록을 위한 Worker Script 생성
+2.&nbsp;**Service Worker Setup 및 Worker Instance 생성**
 
-```bash
+Service Worker를 등록하기 위해 MSW의 전용 CLI를 사용하여 Worker Script를 생성합니다.
+
+```markdown
 npx msw init public(지정경로) --save
 ```
 
-### 🛠 Worker Setup
+이를 통해 지정한 public 폴더 하위에 worker 스크립트가 생성됩니다.
+
+다음으로 Mock Response를 반환하는 handlers를 인수로 전달하여 worker Instance를 생성합니다.
 
 ```tsx
 // ../src/Mocks/browser.ts
@@ -126,9 +132,9 @@ import { handlers } from './handlers';
 export const worker = setupWorker(...handlers);
 ```
 
-- Mock Response를 반환하는 handlers를 인수로 전달하여 worker Instance 생성
+3.&nbsp;**Entry Point에서 Worker 설정**
 
-### 🛠 Entry Point에서 Worker 설정
+dev 환경에서 worker가 실행될 수 있도록, 애플리케이션의 Entry Point에서 조건부 worker 실행 코드를 설정합니다.
 
 ```tsx
 // src/index.tsx
@@ -152,9 +158,27 @@ enableMocking().then(() =>
 );
 ```
 
-- dev 환경시 worker가 실행될 수 있도록, 애플리케이션 최상단에서 조건부 worker 실행 코드를 설정한다.
+4.&nbsp;**인기 모집공고를 가져오는 api fetcher, Mock Data 및 Mock Handler를 정의**
 
-### 🛠 인기있는 모집공고 Mock Data 작성
+인기 모집공고를 가져오는 API Fetcher와 Mock Data 및 handler 정의하였습니다.
+
+**✔︎ API Fetcher**
+
+```tsx
+// src/apis/recruitments.ts
+import { apiRequester } from '@/utils/axios';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+
+export const getPopularRecruitments = () => apiRequester.get('/').then((res) => res.data);
+export const usePopularRecruitments = () => {
+  return useQuery({
+    queryKey: ['popularRecruitments'],
+    queryFn: () => getPopularRecruitments(),
+  });
+};
+```
+
+**✔︎ Mock Data**
 
 ```tsx
 //src/Mocks/data/mockData.ts
@@ -221,7 +245,7 @@ export const popularRecruitmentsMockData: PopularRecruitmentsRawDataType = {
 };
 ```
 
-### 🛠 인기있는 모집공고를 반환하는 handler 작성
+**✔︎ Mock Handler**
 
 ```tsx
 //src/Mocks/handlers/recruitments.ts
@@ -241,23 +265,9 @@ const getPopularRecruitments = http.get(`${baseURL}`, () => {
 });
 ```
 
-### 🛠 인기있는 모집공고를 요청하는 api fetcher 작성
+5.&nbsp;**메인페이지에 정의한 api fetcher 적용**
 
-```tsx
-// src/apis/recruitments.ts
-import { apiRequester } from '@/utils/axios';
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
-
-export const getPopularRecruitments = () => apiRequester.get('/').then((res) => res.data);
-export const usePopularRecruitments = () => {
-  return useQuery({
-    queryKey: ['popularRecruitments'],
-    queryFn: () => getPopularRecruitments(),
-  });
-};
-```
-
-### 🛠 메인페이지에서 api fetcher를 통해 인기 있는 모집공고 Data 가져오기
+인기있는 모집공고 데이터를 렌더링할 메인 페이지에 api fetcher를 적용하였습니다.
 
 ```tsx
 //src/pages/main.tsx
@@ -280,7 +290,7 @@ const Main = () => {
     <div>Loading...</div>
   ) : (
     <MainWrapper>
-      <Banner {...bannerDummy} />
+     ....
       <StudyListWrapper>
         <CardListInfo studyCategory="코딩 테스트" />
         <PopularStudyCardList studyCardsProps={popularRecruitments?.popularCodingRecruitments} />
@@ -305,44 +315,70 @@ const Main = () => {
 ...
 ```
 
-## 💡 MSW 적용 결과
+### 🎬 MSW 동작 확인
 
-### 🛠 Service Worker 실행 여부 확인
+로컬 환경에서 개발자 도구의 Application 탭에서 확인한 결과, Service Worker가 잘 작동되고 있음을 확인하였습니다.
 
-<!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/c9720124-b71e-432b-9a79-6acdcf581679/Untitled.png) -->
+<details markdown="1">
+<summary>Application 탭을 통한 Service Worker 동작 확인</summary>
+  <img width="500" src="./assets/msw/application.png">
+</details>
 
-- 개발자 도구의 Application 탭에서 확인한 결과, Service Worker가 잘 작동되고 있음을 확인
+<br>
+또한 개발자 도구의 console 탭의 로그를 통해 MSW가 정상 실행되었음을 확인하였고, Worker로부터 Mock Response를 통해 인기 있는 모집공고 데이터를 가져온 것을 확인할 수 있었습니다.
+<br><br>
 
-### 🛠  Mock Data의 전달 확인
+<details markdown="1">
+<summary>Console 로그를 통한 MSW 정상 실행 확인</summary>
+  <img width="500" src="./assets/msw/console.png">
+</details>
 
-<!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/ff329ea3-2b93-4e4b-a662-0eca56c899b5/Untitled.png) -->
+<details markdown="1">
+<summary>전달된 Mock Data 확인 - 1</summary>
+  <img width="500" src="./assets/msw/mockData-1.png">
+</details>
 
-<!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/70767210-f391-44d2-ae7f-0651ec2b5223/Untitled.png) -->
+<details markdown="1">
+<summary>전달된 Mock Data 확인 - 2</summary>
+  <img width="500" src="./assets/msw/mockData-2.png">
+</details>
 
-<!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/6c232503-2a95-4e7f-ae52-6660d38ba4a7/Untitled.png) -->
+<details markdown="1">
+<summary>전달된 Mock Data 확인 - 3</summary>
+  <img width="500" src="./assets/msw/mockData-3.png">
+</details>
+<br>
+마지막으로 Mock Response를 통해 전달된 인기 모집공고 데이터가 메인페이지에서 렌더링 되는 것을 확인하였습니다.
+<br>
+<br>
+<details markdown="1">
+<summary>메인페이지 렌더링 - 1</summary>
+  <img width="500" src="./assets/msw/mainpage-1.png">
+</details>
 
-<!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/88fe22bd-1360-4dde-a1cd-04e635271409/Untitled.png) -->
+<details markdown="1">
+<summary>메인페이지 렌더링 - 2</summary>
+  <img width="500" src="./assets/msw/mainpage-2.png">
+</details>
 
-- 콘솔을 통해 MSW가 잘 작동되었음을 확인할 수 있다.
-- Worker로부터 Mock Response를 통해 인기 있는 모집공고 데이터를 가져온 것을 확인할 수 있다.
+## 🤔 MSW 적용 소감
 
-### 🛠  메인페이지 렌더링 결과
+MSW의 2.0.0 버전 이 release된 시기가 2023년 10월이었고, 해당 기술을 프로젝트에 적용하고자 한 시기가 1월 말이었습니다. 그리하여 기존에 사용사례를 찾아본 결과 1.x.x 버전으로 환경 설정을 진행한 레퍼런스가 대부분이어서, 처음에는 새로운 버전으로 MSW 설정을 하는 데에 부담을 느꼈습니다. 하지만 공식문서가 잘 정리되어 있어서, 우려와 다르게 빠르게 프로젝트에 적용할 수 있었습니다.
 
-<!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/59cd531f-198c-4cff-83ed-a68cf85bd5a4/Untitled.png) -->
+MSW를 적용함으로써 몸소 체험한 장점을 요약하면 다음과 같습니다.
 
-<!-- ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/46108c93-39e8-4208-b71d-f6ade06b46a9/Untitled.png) -->
+- 백엔드 API 개발 일정에 독립적인 프론트엔드 개발을 진행할 수 있었습니다.
+- 다양한 네트워크 응답을 Mocking이 가능하여, 같은 페이지 내에서도 다양한 네트워크 응답에 대한 UI를 구현할 수 있었습니다.
+- 클라이언트에서 handler를 작성할 수 있기 때문에, 기존의 로직과 정의된 타입을 재사용할 수 있었다는 점이 좋았습니다.
 
-- 받아온 데이터를 화면에 잘 보여주고 있는 것을 확인할 수 있다.
+이러한 많은 장점을 지닌 MSW를 다른 프로젝트에서도 적용해 프론트엔드 개발의 생산성을 높이는데 활용할 예정입니다.
 
-## 💡 MSW 적용 소감
+## 📓 참고자료
 
-- 공식문서가 잘 정리되어 있어, 빠르게 적용이 가능
-- MSW를 통해 별도의 환경 없이 네트워크 요청에 대한 모의 가능
-- API에 대한 종속성없이 FE 개발을 진행할 수 있었던 좋은 경험
-
-# 📓 참고자료
-
-- [Mocking으로 생산성까지 챙기는 FE 개발](https://tech.kakao.com/2021/09/29/mocking-fe/)
 - [Service Worker](https://developer.mozilla.org/ko/docs/Web/API/Service_Worker_API)
+- [Mocking으로 생산성까지 챙기는 FE 개발](https://tech.kakao.com/2021/09/29/mocking-fe/)
 - [MSW(Mock Service Worker)로 더욱 생산적인 FE 개발하기](https://velog.io/@khy226/msw%EB%A1%9C-%EB%AA%A8%EC%9D%98-%EC%84%9C%EB%B2%84-%EB%A7%8C%EB%93%A4%EA%B8%B0#service-worker%EB%9E%80)
 - [MSW](https://mswjs.io/)
+- [Understanding API Mocking - Part 3: Mock Service Worker](https://egghead.io/blog/understanding-api-mocking-mock-service-worker)
+- [Mock Service Worker로 만드는 모의 서버](https://blog.rhostem.com/posts/2021-03-20-mock-service-worker)
+- [MSW로 API 모킹하기](https://medium.com/@iamkjw/msw%EB%A1%9C-api-%EB%AA%A8%ED%82%B9%ED%95%98%EA%B8%B0-29c80bbed37b)

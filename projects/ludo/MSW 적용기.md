@@ -12,9 +12,8 @@
 - [🤔 MSW 적용 소감](#msw-적용-소감)
 - [📓 참고자료](#참고자료)
 
+스터디 매칭 프로젝트(Ludo)를 진행하면서 초기에 MSW를 도입하고, 이를 활용한 과정을 정리했습니다.
 [✔︎ 관련 PR - MSW를 활용한 Mocking 환경 구성](https://github.com/Ludo-SMP/ludo-frontend/pull/21)
-
-Ludo 프로젝트 초기에 MSW를 도입하고, 이를 활용한 과정을 정리한 글입니다.
 
 ## 📓 MSW 적용 배경
 
@@ -88,19 +87,28 @@ MSW의 동작원리를 학습한 후, 실제로 MSW를 적용하는 과정을 �
 
 ### 📋 MSW 관련 폴더 및 파일 구조
 
+```markdown
+📦ludo-front
+┣ 📂public
+┃ ┣ 📜index.html
+┃ ┗ 📜mockServiceWorker.js
+┗ 📂src
+┃ ┗ 📂mocks
+┃ ┃ ┣ 📂data
+┃ ┃ ┣ 📂handlers
+┃ ┃ ┣ 📂utils
+┃ ┃ ┣ 📜App.tsx
+┃ ┃ ┣ 📜browser.ts
+┃ ┃ ┗ 📜index.tsx
 ```
--- public
-  -- mockServiceWorker.js => **Service Worker 파일**
-  -- index.html
--- src
-  -- mocks
-    -- data => **Mock Data**
-    -- handlers => **Mock Response를 반환하는 handler**
-    -- uitls => **Mock Data를 변환하는 uitil 함수**
-    -- browser.ts => **worker Instance 생성 파일**
-  -- App.tsx => **Root Component**
-  -- index.tsx => **Entry point**
-```
+
+- mockServiceWorker.js : Service Worker 파일
+- data : Mock Data
+- handlers: Mock Response를 반환하는 handler
+- utils: Mock Data를 변환하는 uitil 함수
+- browser.ts : worker Instance 생성 파일
+- App.tsx : Root Component
+- index.tsx : Entry point
 
 ### ⛏ MSW 적용 과정
 

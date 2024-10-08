@@ -63,7 +63,7 @@ MSW는 풀네임인 Mock Service Worker에서 알 수 있듯이 Service Worker�
 >
 > _- Artem Zakharchenko (MSW 개발자)_
 >
-> Service Worker를 사용하는 것은 request client stub이 없고 실제 서버가 보낸 것처럼 네트워크에서 실제 응답을 보내는 것을 의미합니다. 이러한 **_관심사의 분리(separation of concern)_**는 제가 찾던 것을 정확히 제공했기 때문에 저에게 즉시 적용되었습니다. 즉, 애플리케이션의 무결성을 존중하는 가로채기 알고리즘입니다. 게다가 MSW는 worker와 클라이언트 간의 **_관심사를_ 분리**함으로써 lazy worker update나 worker의 수명 주기 단계에 영향을 받지 않는 빠르고 반응성 있는 경험을 제공할 수 있습니다.
+> Service Worker를 사용하는 것은 request client stub이 없고 실제 서버가 보낸 것처럼 네트워크에서 실제 응답을 보내는 것을 의미합니다. 이러한 관심사의 분리(separation of concern)는 제가 찾던 것을 정확히 제공했기 때문에 저에게 즉시 적용되었습니다. 즉, 애플리케이션의 무결성을 존중하는 가로채기 알고리즘입니다. 게다가 MSW는 worker와 클라이언트 간의 **_관심사를_ 분리**함으로써 lazy worker update나 worker의 수명 주기 단계에 영향을 받지 않는 빠르고 반응성 있는 경험을 제공할 수 있습니다.
 
 ## 📓 MSW 동작 원리
 

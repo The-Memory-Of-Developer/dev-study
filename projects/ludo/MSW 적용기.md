@@ -13,6 +13,7 @@
 - [📓 참고자료](#참고자료)
 
 스터디 매칭 프로젝트(Ludo)를 진행하면서 초기에 MSW를 도입하고, 이를 활용한 과정을 정리했습니다.
+
 [✔︎ 관련 PR - MSW를 활용한 Mocking 환경 구성](https://github.com/Ludo-SMP/ludo-frontend/pull/21)
 
 ## 📓 MSW 적용 배경

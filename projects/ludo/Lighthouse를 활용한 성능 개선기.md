@@ -24,12 +24,11 @@
 
 **🎬 개선 전 Lighthouse 지표**
 
-<p align = "center"><img width="400" src="./assets/lighthouse/beforeScore.png"/></p>
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/36294cea-5191-4362-9be7-70144e5b4743/db0d7273-5f55-4fe0-b281-9b353cf0da83/image.png)
+<p align = "center"><img width="600" src="./assets/lighthouse/beforeScore.png"/></p>
 
 **🎬 개선 전 Lighthouse 성능 세부지표**
 
-<p align = "center"><img width="400" src="./assets/lighthouse/beforePerformanceScore.png"/></p>
+<p align = "center"><img width="600" src="./assets/lighthouse/beforePerformanceScore.png"/></p>
 
 사용자가 가장 먼저 마주하게 되는 메인페이지의 성능(Performance) 점수가 좋지 않다면, 페이지 이탈률이 커질 것이라 판단하여 성능 지표를 개선하는 작업을 진행했습니다. 성능 개선에 앞서 Core Web Vitals과 Lighthouse 성능 주요 지표를 학습하는 과정을 선행하였습니다.
 
@@ -41,7 +40,7 @@ Google에서는 웹 페이지의 사용자 경험을 평가하기 위해 필수�
 
 ### 💡Core Web Vitals
 
-<p align = "center"><img width="400" src="./assets/lighthouse/coreWebVitals.png"/></p>
+<p align = "center"><img width="600" src="./assets/lighthouse/coreWebVitals.png"/></p>
 
 1. **LCP(Largest Contentful Paint)**
    - 사용자가 페이지에 방문한 시점부터 뷰포트에서 가장 큰 콘텐츠 요소가 화면에 렌더링되는 시점까지의 시간을 측정하는 항목입니다.
@@ -67,7 +66,7 @@ Google에서는 웹 페이지의 사용자 경험을 평가하기 위해 필수�
 
 ### 💡Lighthouse 주요 성능 지표
 
-<p align = "center"><img width="400" src="./assets/lighthouse/performanceMetrics.png"/></p>
+<p align = "center"><img width="600" src="./assets/lighthouse/performanceMetrics.png"/></p>
 
 웹 성능 지표인 Core Web Vital를 기반으로 한 5가지 Lighthouse 주요 성능 지표는 다음과 같습니다.
 
@@ -92,21 +91,21 @@ Google에서는 웹 페이지의 사용자 경험을 평가하기 위해 필수�
 
 ### 😈 많은 양의 **사용되지 않는 JS 코드**
 
-<p align = "center"><img width="400" src="./assets/lighthouse/unusedCode.png"/></p>
+<p align = "center"><img width="600" src="./assets/lighthouse/unusedCode.png"/></p>
 
 메인페이지에서 로드된 초기 JS 청크 중 사용되지 않은 코드가 절반 이상임을 확인하였고, 메인페이지에서 사용되는 코드만을 불러올 필요성을 확인하였습니다.
 
 ### 😈 **Layout Shift 요소 확인**- 메인페이지 배너
 
-<p align = "center"><img width="400" src="./assets/lighthouse/bannerLayoutShift1.png"/></p>
-<p align = "center"><img width="400" src="./assets/lighthouse/bannerLayoutShift2.png"/></p>
-<p align = "center"><img width="400" src="./assets/lighthouse/bannerLayoutShift3.png"/></p>
+<p align = "center"><img width="600" src="./assets/lighthouse/bannerLayoutShift1.png"/></p>
+<p align = "center"><img width="600" src="./assets/lighthouse/bannerLayoutShift2.png"/></p>
+<p align = "center"><img width="600" src="./assets/lighthouse/bannerLayoutShift3.png"/></p>
 
 Performace 탭과 Lighthouse 보고서를 통해  Layout Shift 요소를 분석한 결과 메인 페이지의 banner가 slide될 때마다 불필요한 Layout Shift가 발생하는 것을 확인했습니다. 이는 배너 구현 시 사용한 react-slick 라이브러리에서의 Setting 옵션 중 CSS transform 활성화 여부를 묻는 `useTransform` 옵션이 false로 설정되어 있는 것이 원인임을 확인했습니다.
 
 ### 😈 LCP 요소의 Loading Delay
 
-<p align = "center"><img width="400" src="./assets/lighthouse/loadingDelay.png"/></p>
+<p align = "center"><img width="600" src="./assets/lighthouse/loadingDelay.png"/></p>
 
 Largest Content 요소인 Banner의 Loading delay가 커짐에 따라, 화면에 배너의 이미지가 늦게 나타는 것의 원인임을 확인했습니다.
 
@@ -188,11 +187,11 @@ Png와 같은 기존 이미지 포맷에서 webp 이미지 포맷을 적용하�
 
 🎬 **웹 폰트, 이미지 최적화 전 파일 용량**
 
-<p align = "center"><img width="400" src="./assets/lighthouse/beforeBundleSize.png"/></p>
+<p align = "center"><img width="600" src="./assets/lighthouse/beforeBundleSize.png"/></p>
 
 🎬 **웹 폰트, 이미지 최적화 작업 후 파일 용량**
 
-<p align = "center"><img width="400" src="./assets/lighthouse/afterBundleSize.png"/></p>
+<p align = "center"><img width="600" src="./assets/lighthouse/afterBundleSize.png"/></p>
 
 ## 💡 배너 이미지 및 웹 폰트 Preload
 
@@ -250,13 +249,13 @@ Largest Content인 배너 이미지의 Loading delay를 줄이기 위해 HTML �
 
 🎬 **Preload 적용 전 Network Waterfall**
 
-<p align = "center"><img width="400" src="./assets/lighthouse/beforePreload1.png"/></p>
+<p align = "center"><img width="600" src="./assets/lighthouse/beforePreload1.png"/></p>
 
-<p align = "center"><img width="400" src="./assets/lighthouse/beforePreload2.png"/></p>
+<p align = "center"><img width="600" src="./assets/lighthouse/beforePreload2.png"/></p>
 
 🎬 **Preload 적용 후 Network Waterfall**
 
-<p align = "center"><img width="400" src="./assets/lighthouse/afterPreload.png"/></p>
+<p align = "center"><img width="600" src="./assets/lighthouse/afterPreload.png"/></p>
 
 배너와 웹 폰트 Preload 적용 후 Network waterfall은 위와 같이 개선되었고, 이를 통해 사용자의 경험을 개선할 수 있었습니다.
 
@@ -266,27 +265,25 @@ Largest Content인 배너 이미지의 Loading delay를 줄이기 위해 HTML �
 
 🎬 **useTransfrom이 False인 경우**
 
-<p align = "center"><img width="400" src="./assets/lighthouse/useTransformFalse.png"/></p>
+<p align = "center"><img width="600" src="./assets/lighthouse/useTransformFalse.png"/></p>
 
 🎬 **useTransfrom이 True인 경우**
 
-<p align = "center"><img width="400" src="./assets/lighthouse/useTransformTrue.png"/></p>
+<p align = "center"><img width="600" src="./assets/lighthouse/useTransformTrue.png"/></p>
 
 ## 📓 개선 결과
 
-Lighthouse 성능 지표 개선과 그 외의 Lighthouse 지표(Accessibility, Best Practices, SEO) 개선 과정을 진행한 결과 모든 지표가 개선되었을 확인했습니다.
-
-(본 포스트에서는 성능 지표 개선이 주제이므로 다른 Lighthouse 지표 개선 과정은 생략하겠습니다.)
+Lighthouse 성능 지표 개선과 그 외의 Lighthouse 지표(Accessibility, Best Practices, SEO) 개선 과정을 진행한 결과 모든 지표가 개선되었을 확인했습니다. (본 포스트에서는 성능 지표 개선이 주제이므로 다른 Lighthouse 지표 개선 과정은 생략하겠습니다.)
 
 **🎬 개선 전 / 후 Lighthouse 지표**
 
-<p align = "center"><img width="400" src="./assets/lighthouse/LighthouseScores.png"/></p>
+<p align = "center"><img width="600" src="./assets/lighthouse/LighthouseScores.png"/></p>
 
 또한 Lighthouse 성능 세부 지표도 모두 개선되었음을 확인했습니다.
 
 **🎬 개선 전 / 후 Lighthouse 성능 세부 지표**
 
-<p align = "center"><img width="400" src="./assets/lighthouse/LighthousePerformanceScores.png"/></p>
+<p align = "center"><img width="600" src="./assets/lighthouse/LighthousePerformanceScores.png"/></p>
 
 ## 📓 Lighthouse를 활용한 성능 개선 소감
 

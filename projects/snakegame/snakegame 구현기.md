@@ -22,7 +22,7 @@
 - [😃 JS SnakeGame 구현 및 정리 소감](#-js-snakegame-구현-및-정리-소감)
 - [🧰 참고자료](#-참고자료)
 
-<p align = "center"><img width="400" src="./asset/play.gif"/></p>
+<p align = "center"><img width="400" src="./assets/play.gif"/></p>
 
 JavaScript를 활용하여 구현한 JS-SnakeGame의 구현 과정을 상세히 정리한 글입니다.
 
@@ -37,8 +37,8 @@ JavaScript를 활용하여 구현한 JS-SnakeGame의 구현 과정을 상세히 
 ### 🛠 컴포넌트 설계
 
 <div display="flex" align="center">
-  <span align = "center"><img width="350" src="./asset//board.png"/>
-  <span align = "center"><img width="300" src="./asset/modal.png"/>
+  <span align = "center"><img width="350" src="./assets/board.png"/>
+  <span align = "center"><img width="300" src="./assets/modal.png"/>
 </div>
 
 - Game Title : GameTitle을 표시하는 Component
@@ -854,7 +854,7 @@ render() {
 
 ### 🤔 빠르게 연속적인 방향키 입력 시, Body와 충돌한 것으로 처리되는 문제
 
-<p align = "center"><img width="400" src="./asset/collision.gif"/></p>
+<p align = "center"><img width="400" src="./assets/collision.gif"/></p>
 
 처음에는 뱀의 방향을 바꾸는 이벤트 핸들러 함수(getDirection)를 addEventListener를 통해 window 객체에 등록하여, 방향키를 입력받는 기능을 구현하였습니다. 하지만 위에서와 같이 빠르게 연속적으로 방향키를 입력 시(위의 gif에서는 뱀의 이동방향이 → 일 때, 연속적으로 ↑ ← 방향키를 입력한 경우입니다.), 뱀의 head와 body가 충돌한 것으로 인식되어, 게임이 종료되고 Modal이 띄워지는 문제가 발생합니다. 이를 해결하기 위해 연속된 일련의 호출을 하나의 호출로 그룹화 하는 Debounce함수를 사용하여, Interval time내 방향키를 입력받는 함수가 두 번 이상 호출 되지 않도록 하였습니다.
 

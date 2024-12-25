@@ -13,4 +13,8 @@
 
 ### JS-SnakeGame
 
--[snakegame 구현기](https://github.com/The-Memory-Of-Developer/dev-study/blob/main/projects/snakegame/snakegame%20%EA%B5%AC%ED%98%84%EA%B8%B0.md)
+- [snakegame 구현기](https://github.com/The-Memory-Of-Developer/dev-study/blob/main/projects/snakegame/snakegame%20%EA%B5%AC%ED%98%84%EA%B8%B0.md)
+
+## 📚 Books
+
+### [코어 JavaScript](https://github.com/The-Memory-Of-Developer/dev-study/tree/main/books/%EC%BD%94%EC%96%B4%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8)

@@ -24,7 +24,7 @@ _Lighouse는 웹페이지 품질을 개선하기 위한 오픈소스 자동화 �
 
 이를 정리하면 Lighthouse는 웹 앱 및 웹 페이지를 분석하여 성능지표, 접근성, PWA, SEO 등의 항목에 대한 audit 결과를 점수로 제공하고, 각 항목을 개선하기 위한 인사이트를 제공하는 오픈소스 자동화 도구입니다.
 
-### 📓 Lighthouse CI
+## 📓 Lighthouse CI
 
 **Lighthouse CI**는 Google의 **Lighthouse** 도구를 CI/CD 파이프라인에서 자동으로 실행하고 결과를 저장 및 관리할 수 있게 해주는 오픈 소스 도구입니다. 따라서 Lighthouse CI를 통해 웹 페이지의 성능을 지속적으로 측정하고, 이를 GitHub Actions와 연동하여 PR(Pull Request)에 자동으로 피드백을 반영할 수 있게 되고, 이를 통해 페이지의 품질을 자동으로 모니터링하고 코드 변경 사항에 대한 지속적인 품질 관리를 할 수 있게 됩니다.
 
@@ -76,29 +76,38 @@ GitHub Actions는 GitHub에서 제공하는 CI/CD(지속적인 통합/지속적�
 ### 1. Lighthouse CI Github App 설치 후, Action Secrets 설정
 
 Lighthouse CI와 Github Actions을 연동하기 위해, Lighthouse CI Github App을 Repository에 설치한 후, 생성된 Token을 Action Secrets으로 설정하는 과정이 선행하였습니다.
+
 <img src="./assets//lighthouse/configuration-1.png" width="400">
 
 먼저, Github 마켓 플레이스에서 Lighthouse CI App을 설치해줍니다.
 
 <img src="./assets//lighthouse/configuration-2.png" width="400">
+
 Install 버튼을 누르면 Lighthouse CI를 설치할 Organization을 선택할 수 있습니다. 저는 Ludo 프로젝트를 관리하고 있는 Ludo-SMP Organization을 선택하였습니다.
 
 <img src="./assets//lighthouse/configuration-3.png" width="400">
+
 <img src="./assets//lighthouse/configuration-4.png" width="400">
+
 모든 저장소에 Lighthouse CI를 설치할 것인지, 개별 저장소에 설치할 것인지를 선택합니다. Frontend 저장소에만 Lighthouse CI를 적용시키기 위해 ludo-frontend 저장소를 선택하였습니다.
+
 <img src="./assets//lighthouse/configuration-5.png" width="400">
+
 다음과 같이 회색 영역에 생성된 Token이 표시가 됩니다.
+
 <img src="./assets//lighthouse/configuration-6.png" width="400">
+
 <img src="./assets//lighthouse/configuration-7.png" width="400">
 
 <img src="./assets//lighthouse/configuration-8.png" width="400">
+
 Lighthouse CI를 적용할 저장소의 Settings - Secrets and variables - Actions - New repository secret을 클릭하여 Name을 LHCI_GITHUB_APP_TOKEN으로 설정하고, 이전 단계에서 생성된 Token 값을 Secret에 적용하여 Action Secret을 설정해줍니다.
 
 ### 2. Lighthouse CI에 사용되는 상수 정의
 
 Lighthouse CI를 설정하는 데 필요한 상수를 정의했습니다.
 
-```tsx
+```ts
 // src/Constants/lighthouse.ts
 
 const TEST_RECRUITMENT_ID = 70;
@@ -138,7 +147,7 @@ module.exports = {
 
 ### 3. Lighthouse Configuration 설정
 
-mobile 환경과 desktop 환경을 구분하여 Lighthouse Configuration을 설정했습니다.
+mobile 환경과 desktop 환경을 구분하여 Lighthouse Configuration을 설정했습니다.
 
 ```jsx
 // lighthouserc-mobile.cjs
@@ -231,7 +240,7 @@ permissions:
 
 **Lighthouse CI**를 활용한 성능 테스트를 진행할 수 있도록 필요한 환경을 설정했습니다. 이를 통해 코드를 체크아웃하고, Node.js 환경을 설정하며, 의존성을 설치하고, 로컬 서버를 설정한 후, 프로젝트를 빌드하여 테스트가 실행될 환경을 준비합니다.
 
-```
+```yaml
 jobs:
   lhci:
     name: Lighthouse CI
@@ -266,262 +275,151 @@ jobs:
 
 Mobile과 Desktop 환경별로 설정된 configuration 파일을 기반으로 Lighthouse CI를 실행하여, Report를 생성합니다.
 
-```
-      # 3.6. Desktop Lighthouse CI 실행
-      - name: Run Lighthouse CI - Desktop
-        env:
-          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
-        run: |
-          yarn global add @lhci/cli
-          lhci collect --config=lighthouserc-desktop.cjs || echo "Fail to Run Lighthouse CI!"
-          lhci upload --config=lighthouserc-desktop.cjs || echo "Fail to Run Lighthouse CI!"
+```yaml
+# 6. Desktop Lighthouse CI 실행
+- name: Run Lighthouse CI - Desktop
+  env:
+    LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+  run: |
+    yarn global add @lhci/cli
+    lhci collect --config=lighthouserc-desktop.cjs || echo "Fail to Run Lighthouse CI!"
+    lhci upload --config=lighthouserc-desktop.cjs || echo "Fail to Run Lighthouse CI!"
 
-      # 3.7. Mobile Lighthouse CI 실행
-      - name: Run Lighthouse CI - Mobile
-        env:
-          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
-        run: |
-          lhci collect --config=lighthouserc-mobile.cjs || echo "Fail to Run Lighthouse CI!"
-          lhci upload --config=lighthouserc-mobile.cjs || echo "Fail to Run Lighthouse CI!"
-
+# 7. Mobile Lighthouse CI 실행
+- name: Run Lighthouse CI - Mobile
+  env:
+    LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+  run: |
+    lhci collect --config=lighthouserc-mobile.cjs || echo "Fail to Run Lighthouse CI!"
+    lhci upload --config=lighthouserc-mobile.cjs || echo "Fail to Run Lighthouse CI!"
 ```
 
 #### 💡 주요 지표 포매팅
 
 **GitHub Script** 액션을 사용하여 Lighthouse 결과를 읽고, 성능 지표를 **포맷팅**합니다. 해당 스크립트를 통해 `lhci_reports` 디렉토리에 저장된 데스크탑 및 모바일 보고서를 읽고, 성능 지표(성능, 접근성, SEO 등)를 추출합니다. 또한 각 페이지별로 점수를 **표 형식**으로 포맷팅하고, PR에 추가할 수 있도록 **Markdown 형식**으로 생성합니다.
 
-```
+```yaml
 - name: Format Lighthouse Score
-
-id: format_lighthouse_score
-
-uses: actions/github-script@v7
-
-env:
-
-working-directory: ${{ github.workspace }}
-
-with:
-
-github-token: ${{ secrets.GITHUB_TOKEN }}
-
-script: |
-
-const fs = require('fs');
-
-
-
-const {
-
-LH_MONITORING_PAGE_NAMES,
-
-DEV_ORIGIN_URL,
-
-LH_MONITORING_PAGE_ROUTES,
-
-LH_MIN_SCORES,
-
-} = require('./src/Constants/lighthouse.ts');
-
-
-
-const desktopLightHouseResults = JSON.parse(fs.readFileSync('lhci_reports/desktop/manifest.json'));
-
-const mobileLightHouseResults = JSON.parse(fs.readFileSync('lhci_reports/mobile/manifest.json'));
-
-
-
-let comments = `### 💡 LightHouse Reports\n\n`;
-
-comments += `#### 🟢 90 ~ 100 &nbsp;&nbsp; 🟠 50 ~ 89 &nbsp;&nbsp; 🔴 0 ~ 49 \n\n`;
-
-
-
-const getFormattingScore = (res) => Math.round(res * 100);
-
-
-
-const getScoreColor = (score) => (score >= LH_MIN_SCORES.GREEN ? '🟢' : score >= LH_MIN_SCORES.ORANGE ? '🟠' : '🔴');
-
-
-
-const getMonitoringPageName = (url) => {
-
-const route = url.replace(DEV_ORIGIN_URL, '');
-
-
-
-for (let pageName of LH_MONITORING_PAGE_NAMES) {
-
-if (route === LH_MONITORING_PAGE_ROUTES[pageName]) return pageName;
-
-}
-
-};
-
-
-
-const getFormattingResultByPage = (result) => {
-
-const { url, summary, jsonPath } = result;
-
-const { audits } = JSON.parse(fs.readFileSync(jsonPath));
-
-
-
-const { performance, accessibility, 'best-practices': bestPractices, seo } = summary;
-
-
-
-const {
-
-'first-contentful-paint': firstContentfulPaint,
-
-'largest-contentful-paint': largestContentfulPaint,
-
-'speed-index': speedIndex,
-
-'total-blocking-time': totalBlockingTime,
-
-'cumulative-layout-shift': cumulativeLayoutShift,
-
-} = audits;
-
-
-
-const formattingTable = [
-
-`| Category | Score |`,
-
-`| --- | --- |`,
-
-`| ${getScoreColor(getFormattingScore(performance))} Performance | ${getFormattingScore(performance)} |`,
-
-`| ${getScoreColor(getFormattingScore(accessibility))} Accessibility | ${getFormattingScore(accessibility)} |`,
-
-`| ${getScoreColor(getFormattingScore(bestPractices))} Best practices | ${getFormattingScore(bestPractices)} |`,
-
-`| ${getScoreColor(getFormattingScore(seo))} SEO | ${getFormattingScore(seo)} |`,
-
-`| ${getScoreColor(getFormattingScore(firstContentfulPaint.score))} First Contentful Paint | ${firstContentfulPaint.displayValue} |`,
-
-`| ${getScoreColor(getFormattingScore(largestContentfulPaint.score))} Largest Contentful Paint | ${largestContentfulPaint.displayValue} |`,
-
-`| ${getScoreColor(getFormattingScore(speedIndex.score))} Speed Index | ${speedIndex.displayValue} |`,
-
-`| ${getScoreColor(getFormattingScore(totalBlockingTime.score))} Total Blocking Time | ${totalBlockingTime.displayValue} |`,
-
-`| ${getScoreColor(getFormattingScore(cumulativeLayoutShift.score))} Cumulative Layout Shift | ${cumulativeLayoutShift.displayValue} |`,
-
-`\n`,
-
-].join('\n');
-
-
-
-return `<details>\n<summary>${`📄 ${getMonitoringPageName(url)}\n`}</summary>\n\n${formattingTable}\n</details>\n\n`;
-
-};
-
-
-
-const getLightHouseFormattingResult = (results, type) => {
-
-let comment = type === 'mobile' ? `#### 📱 Mobile\n` : `#### 🖥 Desktop\n`;
-
-results.forEach((result) => (comment += getFormattingResultByPage(result)));
-
-
-
-return comment + '\n';
-
-};
-
-
-
-comments += getLightHouseFormattingResult(desktopLightHouseResults, 'desktop');
-
-comments += getLightHouseFormattingResult(mobileLightHouseResults, 'mobile');
-
-core.setOutput('comments', comments)
+  id: format_lighthouse_score
+  uses: actions/github-script@v7
+  env:
+    working-directory: ${{ github.workspace }}
+  with:
+    github-token: ${{ secrets.GITHUB_TOKEN }}
+    script: |
+      const fs = require('fs');
+
+      const {
+        LH_MONITORING_PAGE_NAMES,
+        DEV_ORIGIN_URL,
+        LH_MONITORING_PAGE_ROUTES,
+        LH_MIN_SCORES,
+      } = require('./src/Constants/lighthouse.ts');
+
+      const desktopLightHouseResults = JSON.parse(fs.readFileSync('lhci_reports/desktop/manifest.json'));
+      const mobileLightHouseResults = JSON.parse(fs.readFileSync('lhci_reports/mobile/manifest.json'));
+
+      let comments = `### 💡 LightHouse Reports\n\n`;
+      comments += `#### 🟢 90 ~ 100 &nbsp;&nbsp; 🟠 50 ~ 89 &nbsp;&nbsp; 🔴 0 ~ 49 \n\n`;
+
+      const getFormattingScore = (res) => Math.round(res * 100);
+
+      const getScoreColor = (score) => (score >= LH_MIN_SCORES.GREEN ? '🟢' : score >= LH_MIN_SCORES.ORANGE ? '🟠' : '🔴');
+
+      const getMonitoringPageName = (url) => {
+        const route = url.replace(DEV_ORIGIN_URL, '');
+
+        for (let pageName of LH_MONITORING_PAGE_NAMES) {
+          if (route === LH_MONITORING_PAGE_ROUTES[pageName]) return pageName;
+        }
+      };
+
+      const getFormattingResultByPage = (result) => {
+        const { url, summary, jsonPath } = result;
+        const { audits } = JSON.parse(fs.readFileSync(jsonPath));
+
+        const { performance, accessibility, 'best-practices': bestPractices, seo } = summary;
+
+        const {
+          'first-contentful-paint': firstContentfulPaint,
+          'largest-contentful-paint': largestContentfulPaint,
+          'speed-index': speedIndex,
+          'total-blocking-time': totalBlockingTime,
+          'cumulative-layout-shift': cumulativeLayoutShift,
+        } = audits;
+
+        const formattingTable = [
+          `| Category | Score |`,
+          `| --- | --- |`,
+          `| ${getScoreColor(getFormattingScore(performance))} Performance | ${getFormattingScore(performance)} |`,
+          `| ${getScoreColor(getFormattingScore(accessibility))} Accessibility | ${getFormattingScore(accessibility)} |`,
+          `| ${getScoreColor(getFormattingScore(bestPractices))} Best practices | ${getFormattingScore(bestPractices)} |`,
+          `| ${getScoreColor(getFormattingScore(seo))} SEO | ${getFormattingScore(seo)} |`,
+          `| ${getScoreColor(getFormattingScore(firstContentfulPaint.score))} First Contentful Paint | ${firstContentfulPaint.displayValue} |`,
+          `| ${getScoreColor(getFormattingScore(largestContentfulPaint.score))} Largest Contentful Paint | ${largestContentfulPaint.displayValue} |`,
+          `| ${getScoreColor(getFormattingScore(speedIndex.score))} Speed Index | ${speedIndex.displayValue} |`,
+          `| ${getScoreColor(getFormattingScore(totalBlockingTime.score))} Total Blocking Time | ${totalBlockingTime.displayValue} |`,
+          `| ${getScoreColor(getFormattingScore(cumulativeLayoutShift.score))} Cumulative Layout Shift | ${cumulativeLayoutShift.displayValue} |`,
+          `\n`,
+        ].join('\n');
+
+        return `<details>\n<summary>${`📄 ${getMonitoringPageName(url)}\n`}</summary>\n\n${formattingTable}\n</details>\n\n`;
+      };
+
+      const getLightHouseFormattingResult = (results, type) => {
+        let comment = type === 'mobile' ? `#### 📱 Mobile\n` : `#### 🖥  Desktop\n`;
+        results.forEach((result) => (comment += getFormattingResultByPage(result)));
+
+        return comment + '\n';
+      };
+
+      comments += getLightHouseFormattingResult(desktopLightHouseResults, 'desktop');
+      comments += getLightHouseFormattingResult(mobileLightHouseResults, 'mobile');
+
+      core.setOutput('comments', comments)
 ```
 
 #### 💡 PR Comment 반영
 
 `Octokit`을 사용해 현재 PR에 기존 코멘트를 찾아 업데이트하거나, 새로운 코멘트를 추가합니다. `format_lighthouse_score` 단계에서 포맷팅한 Lighthouse 보고서를 PR에 코멘트로 추가합니다. 만약 이전에 Lighthouse 보고서가 있었다면 이를 업데이트하고, 없다면 새로 생성합니다.
 
-```
+```yaml
 - name: Comment PR
+        id: add_pr_comment
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { Octokit } = require('@octokit/rest');
+            const octokit = new Octokit({ auth: `${{ secrets.GITHUB_TOKEN }}` });
 
-id: add_pr_comment
+            const { payload, repo } = context
 
-uses: actions/github-script@v7
+            const newComment = `${{ steps.format_lighthouse_score.outputs.comments }}`
 
-with:
+            const { data: prevComments } = await octokit.rest.issues.listComments({
+              owner: repo.owner,
+              repo: repo.repo,
+              issue_number : payload.pull_request.number,
+            })
 
-github-token: ${{ secrets.GITHUB_TOKEN }}
+            const prevReportComment = prevComments.find(comment => comment.body.includes(`### 💡 LightHouse Reports\n\n`));
 
-script: |
-
-const { Octokit } = require('@octokit/rest');
-
-const octokit = new Octokit({ auth: `${{ secrets.GITHUB_TOKEN }}` });
-
-
-
-const { payload, repo } = context
-
-
-
-const newComment = `${{ steps.format_lighthouse_score.outputs.comments }}`
-
-
-
-const { data: prevComments } = await octokit.rest.issues.listComments({
-
-owner: repo.owner,
-
-repo: repo.repo,
-
-issue_number : payload.pull_request.number,
-
-})
-
-
-
-const prevReportComment = prevComments.find(comment => comment.body.includes(`### 💡 LightHouse Reports\n\n`));
-
-
-
-if (prevReportComment) {
-
-await octokit.rest.issues.updateComment({
-
-owner: repo.owner,
-
-repo: repo.repo,
-
-comment_id: prevReportComment.id,
-
-body: newComment,
-
-});
-
-} else {
-
-await octokit.rest.issues.createComment({
-
-owner: repo.owner,
-
-repo: repo.repo,
-
-issue_number: payload.pull_request.number,
-
-body: newComment,
-
-});
-
-}
+            if (prevReportComment) {
+                await octokit.rest.issues.updateComment({
+                  owner: repo.owner,
+                  repo: repo.repo,
+                  comment_id: prevReportComment.id,
+                  body: newComment,
+              });
+            } else {
+                await octokit.rest.issues.createComment({
+                owner: repo.owner,
+                repo: repo.repo,
+                issue_number: payload.pull_request.number,
+                body: newComment,
+              });
+            }
 ```
 
 ### 📄 결과

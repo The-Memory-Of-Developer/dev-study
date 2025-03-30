@@ -1,4 +1,4 @@
-- [📓 Lighthouse CI 자동화 환경 구축 계기](#lighthouse-ci-자동화-환경-구축-계기)
+- [📓 Lighthouse CI를 활용한 웹 성능 측정 자동화 환경 구축기](#lighthouse-ci를-활용한-웹-성능-측정-자동화-환경-구축기)
 - [📓 Lighthouse](#lighthouse)
 - [📓 Lighthouse CI](#-lighthouse-ci)
 - [📓 Lighthouse 주요 지표](#lighthouse-주요-지표)
@@ -19,14 +19,14 @@
   - [📄 결과](#결과)
     - [💡 반영된 PR Comment](#반영된-pr-comment)
     - [💡 페이지별 주요 지표](#페이지별-주요-지표)
-  - [🤔 Lighthouse CI를 활용한 자동화 환경 구축 소감](#-lighthouse-ci를-활용한-자동화-환경-구축-소감)
+  - [🤔Lighthouse CI를 활용한 웹 성능 측정 자동화 환경 구축 소감](#lighthouse-ci를-활용한-웹-성능-측정-자동화-환경-구축-소감)
 - [📓 References](#references)
 
 [✔︎ Lighthouse 자동화 환경 구축 관련 PR](https://github.com/Ludo-SMP/ludo-frontend/pull/349)
 
 Lighthouse 자동화 환경 구축을 진행한 경험을 작성한 글입니다.
 
-## 📓 Lighthouse CI 자동화 환경 구축 계기
+## 📓 Lighthouse CI를 활용한 웹 성능 측정 자동화 환경 구축기
 
 앞선 2차례의 마일스톤에서는 주요 기능 구현에 집중을 하여 프론트엔드 성능 최적화는 자연스레 후순위로 밀리게 되었습니다. 그리하여 3차 마일스톤에서는 프론트엔드 성능 개선을 목표로 설정하고, Lighthouse를 활용한 성능 개선 작업을 진행하였습니다.
 
@@ -456,7 +456,7 @@ Mobile과 Desktop 환경별로 설정된 configuration 파일을 기반으로 Li
 
 <img src="./assets//lighthouse/result-2.png" width="300">
 
-### 🤔 Lighthouse CI를 활용한 자동화 환경 구축 소감
+### 🤔Lighthouse CI를 활용한 웹 성능 측정 자동화 환경 구축 소감
 
 Lighthouse CI를 활용한 성능 측정 자동화 환경 구축 과정을 통해, 여러 중요한 기술을 익힐 수 있었습니다. GitHub Actions를 이용해 PR 생성 시 자동으로 Lighthouse 성능을 측정하고, 결과를 실시간으로 공유할 수 있게 되었습니다.
 Lighthouse CI를 설정하여 성능, 접근성, SEO, 베스트 프랙티스를 자동으로 점검하고, Octokit을 활용해 GitHub API와 연동하여 PR에 성능 보고서를 자동으로 PR Comment로 남길 수 있었습니다. 이러한 자동화된 성능 측정 시스템을 구축을 통해 성능 문제를 조기에 식별하고 대응할 수 있는 환경을 마련하게 되었고, 팀의 개발 효율성을 높이는 데 기여할 수 있었습니다.

@@ -442,7 +442,7 @@ Lighthouse CI를 설정하여 성능, 접근성, SEO, 베스트 프랙티스를 
 
 - [Lighthouse 개요](https://developer.chrome.com/docs/lighthouse/overview?hl=ko)
 - [Lighthouse](https://github.com/GoogleChrome/lighthouse)
-- [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci) \*\*\*\*
+- [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci)
 - [Lighthouse CI를 알아보고 Github Actions에 적용하기](https://fe-developers.kakaoent.com/2022/220602-lighthouse-with-github-actions/)
 - [Lighthouse CI 적용](https://velog.io/@bae-sh/Lighthouse-CI-%EC%A0%81%EC%9A%A9#lighthousercjs)
 - [octokit/rest.js](https://octokit.github.io/rest.js/v21/#issues-get-comment)

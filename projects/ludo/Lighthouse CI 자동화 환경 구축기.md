@@ -12,7 +12,7 @@
   - [3. Lighthouse Configuration 설정](#3-lighthouse-configuration-설정)
   - [4. Lighthouse Workflow 작성](#4-lighthouse-workflow-작성)
     - [💡 Setup 설정](#-setup-설정)
-    - [💡Lighthouse CI를 활용한 성능 테스트를 위한 환경 설정\*\*](#lighthouse-ci를-활용한-성능-테스트를-위한-환경-설정)
+    - [💡Lighthouse CI를 활용한 성능 테스트를 위한 환경 설정](#lighthouse-ci를-활용한-성능-테스트를-위한-환경-설정)
     - [💡 Lighthouse CI 실행 및 Report 생성](#-lighthouse-ci-실행-및-report-생성)
     - [💡 주요 지표 포매팅](#-주요-지표-포매팅)
     - [💡 PR Comment 반영](#-pr-comment-반영)
@@ -260,7 +260,7 @@ permissions:
 - **`on.pull_request`**: 이 워크플로우가 PR이 `dev` 브랜치에 대해 `synchronize` 또는 `opened` 될 때 트리거되도록 설정됩니다.
 - **`permissions`**: `contents: read`와 `pull-requests: write` 권한을 설정하여, PR에 대한 읽기/쓰기 권한을 부여합니다.
 
-#### 💡Lighthouse CI를 활용한 성능 테스트를 위한 환경 설정\*\*
+#### 💡Lighthouse CI를 활용한 성능 테스트를 위한 환경 설정
 
 **Lighthouse CI**를 활용한 성능 테스트를 진행할 수 있도록 필요한 환경을 설정했습니다. 이를 통해 코드를 체크아웃하고, Node.js 환경을 설정하며, 의존성을 설치하고, 로컬 서버를 설정한 후, 프로젝트를 빌드하여 테스트가 실행될 환경을 준비합니다.
 

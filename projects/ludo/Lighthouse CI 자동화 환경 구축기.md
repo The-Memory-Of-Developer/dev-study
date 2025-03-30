@@ -77,29 +77,29 @@ GitHub Actions는 GitHub에서 제공하는 CI/CD(지속적인 통합/지속적�
 
 Lighthouse CI와 Github Actions을 연동하기 위해, Lighthouse CI Github App을 Repository에 설치한 후, 생성된 Token을 Action Secrets으로 설정하는 과정이 선행하였습니다.
 
-<img src="./assets//lighthouse/configuration-1.png" width="400">
+<img src="./assets//lighthouse/lighthouseci-config-1.png" width="400">
 
 먼저, Github 마켓 플레이스에서 Lighthouse CI App을 설치해줍니다.
 
-<img src="./assets//lighthouse/configuration-2.png" width="400">
+<img src="./assets//lighthouse/lighthouseci-config-2.png" width="400">
 
 Install 버튼을 누르면 Lighthouse CI를 설치할 Organization을 선택할 수 있습니다. 저는 Ludo 프로젝트를 관리하고 있는 Ludo-SMP Organization을 선택하였습니다.
 
-<img src="./assets//lighthouse/configuration-3.png" width="400">
+<img src="./assets//lighthouse/lighthouseci-config-3.png" width="400">
 
-<img src="./assets//lighthouse/configuration-4.png" width="400">
+<img src="./assets//lighthouse/lighthouseci-config-4.png" width="400">
 
 모든 저장소에 Lighthouse CI를 설치할 것인지, 개별 저장소에 설치할 것인지를 선택합니다. Frontend 저장소에만 Lighthouse CI를 적용시키기 위해 ludo-frontend 저장소를 선택하였습니다.
 
-<img src="./assets//lighthouse/configuration-5.png" width="400">
+<img src="./assets//lighthouse/lighthouseci-config-5.png" width="400">
 
 다음과 같이 회색 영역에 생성된 Token이 표시가 됩니다.
 
-<img src="./assets//lighthouse/configuration-6.png" width="400">
+<img src="./assets//lighthouse/lighthouseci-config-6.png" width="400">
 
-<img src="./assets//lighthouse/configuration-7.png" width="400">
+<img src="./assets//lighthouse/lighthouseci-config-7.png" width="400">
 
-<img src="./assets//lighthouse/configuration-8.png" width="400">
+<img src="./assets//lighthouse/lighthouseci-config-8.png" width="400">
 
 Lighthouse CI를 적용할 저장소의 Settings - Secrets and variables - Actions - New repository secret을 클릭하여 Name을 LHCI_GITHUB_APP_TOKEN으로 설정하고, 이전 단계에서 생성된 Token 값을 Secret에 적용하여 Action Secret을 설정해줍니다.
 

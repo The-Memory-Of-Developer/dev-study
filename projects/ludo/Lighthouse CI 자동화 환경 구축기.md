@@ -1,3 +1,27 @@
+- [📓 Lighthouse CI 자동화 환경 구축 계기](#lighthouse-ci-자동화-환경-구축-계기)
+- [📓 Lighthouse](#lighthouse)
+- [📓 Lighthouse CI](#-lighthouse-ci)
+- [📓 Lighthouse 주요 지표](#lighthouse-주요-지표)
+  - [💡 성능(Performance)](#성능performance)
+- [📓 Lighthouse 환경 구성 시 사용한 Tool](#lighthouse-환경-구성-시-사용한-tool)
+  - [Github Actions](#github-actions)
+  - [Octokit](#octokit)
+- [🎬 Lighthouse 자동화 환경 구축](#lighthouse-자동화-환경-구축)
+  - [1. Lighthouse CI Github App 설치 후, Action Secrets 설정](#1-lighthouse-ci-github-app-설치-후-action-secrets-설정)
+  - [2. Lighthouse CI에 사용되는 상수 정의](#2-lighthouse-ci에-사용되는-상수-정의)
+  - [3. Lighthouse Configuration 설정](#3-lighthouse-configuration-설정)
+  - [4. Lighthouse Workflow 작성](#4-lighthouse-workflow-작성)
+    - [💡 Setup 설정](#-setup-설정)
+    - [💡Lighthouse CI를 활용한 성능 테스트를 위한 환경 설정\*\*](#lighthouse-ci를-활용한-성능-테스트를-위한-환경-설정)
+    - [💡 Lighthouse CI 실행 및 Report 생성](#-lighthouse-ci-실행-및-report-생성)
+    - [💡 주요 지표 포매팅](#-주요-지표-포매팅)
+    - [💡 PR Comment 반영](#-pr-comment-반영)
+  - [📄 결과](#결과)
+    - [💡 반영된 PR Comment](#반영된-pr-comment)
+    - [💡 페이지별 주요 지표](#페이지별-주요-지표)
+  - [🤔 Lighthouse CI를 활용한 자동화 환경 구축 소감](#-lighthouse-ci를-활용한-자동화-환경-구축-소감)
+- [📓 References](#references)
+
 [✔︎ Lighthouse 자동화 환경 구축 관련 PR](https://github.com/Ludo-SMP/ludo-frontend/pull/349)
 
 Lighthouse 자동화 환경 구축을 진행한 경험을 작성한 글입니다.
@@ -211,7 +235,7 @@ module.exports = {
 };
 ```
 
-### 3. Lighthouse Workflow 작성
+### 4. Lighthouse Workflow 작성
 
 설정한 Lighthouse 상수 및 Configuration을 기반으로 Lighthouse Worflow를 작성했습니다.
 

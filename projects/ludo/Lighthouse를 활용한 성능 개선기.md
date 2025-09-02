@@ -10,8 +10,7 @@
 - [📓 성능 개선 작업](#성능-개선-작업)
   - [💡 Code Splitting 적용](#code-splitting-적용)
   - [💡 웹 폰트 및 이미지 최적화](#웹-폰트-및-이미지-최적화)
-- [💡 배너 이미지 및 웹 폰트 Preload](#배너-이미지-및-웹-폰트-preload)
-  - [💡 Layout Shift 제거](#layout-shift-제거)
+  - [💡 배너 이미지 및 웹 폰트 Preload](#배너-이미지-및-웹-폰트-preload)
 - [📓 개선 결과](#개선-결과)
 - [📓 Lighthouse를 활용한 성능 개선 소감](#lighthouse를-활용한-성능-개선-소감)
 - [📓 참고자료](#참고자료)
@@ -192,7 +191,7 @@ Png와 같은 기존 이미지 포맷에서 webp 이미지 포맷을 적용하�
 
 <p align = "center"><img width="600" src="./assets/lighthouse/afterBundleSize.png"/></p>
 
-## 💡 배너 이미지 및 웹 폰트 Preload
+### 💡 배너 이미지 및 웹 폰트 Preload
 
 **🛠 배너 이미지 Preload**
 
@@ -257,18 +256,6 @@ Largest Content인 배너 이미지의 Loading delay를 줄이기 위해 HTML �
 <p align = "center"><img width="600" src="./assets/lighthouse/afterPreload.png"/></p>
 
 배너와 웹 폰트 Preload 적용 후 Network waterfall은 위와 같이 개선되었고, 이를 통해 사용자의 경험을 개선할 수 있었습니다.
-
-### 💡 Layout Shift 제거
-
-메인페이지 배너의 Layout Shift 발생 원인이었던 react-slick 옵션의 useTransform의 값을 false에서 true로 변경하여 Layout Shift를 제거했습니다.
-
-🎬 **useTransfrom이 False인 경우**
-
-<p align = "center"><img width="600" src="./assets/lighthouse/useTransformFalse.png"/></p>
-
-🎬 **useTransfrom이 True인 경우**
-
-<p align = "center"><img width="600" src="./assets/lighthouse/useTransformTrue.png"/></p>
 
 ## 📓 개선 결과
 

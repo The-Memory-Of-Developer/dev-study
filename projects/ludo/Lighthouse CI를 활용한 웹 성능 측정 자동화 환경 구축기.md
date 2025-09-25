@@ -23,6 +23,7 @@
 - [📓 References](#references)
 
 Lighthouse 자동화 환경 구축을 진행한 경험을 작성한 글입니다.
+
 <b>[🛠 Lighthouse 자동화 환경 구축 관련 PR](https://github.com/Ludo-SMP/ludo-frontend/pull/349)</b>
 
 ## 📓 Lighthouse CI를 활용한 웹 성능 측정 자동화 환경 구축기

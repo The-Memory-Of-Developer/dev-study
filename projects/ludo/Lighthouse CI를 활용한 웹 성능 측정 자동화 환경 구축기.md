@@ -22,15 +22,17 @@
   - [🤔Lighthouse CI를 활용한 웹 성능 측정 자동화 환경 구축 소감](#lighthouse-ci를-활용한-웹-성능-측정-자동화-환경-구축-소감)
 - [📓 References](#references)
 
-[✔︎ Lighthouse 자동화 환경 구축 관련 PR](https://github.com/Ludo-SMP/ludo-frontend/pull/349)
-
 Lighthouse 자동화 환경 구축을 진행한 경험을 작성한 글입니다.
+<b>[🛠 Lighthouse 자동화 환경 구축 관련 PR](https://github.com/Ludo-SMP/ludo-frontend/pull/349)</b>
 
 ## 📓 Lighthouse CI를 활용한 웹 성능 측정 자동화 환경 구축기
 
-앞선 2차례의 마일스톤에서는 주요 기능 구현에 집중을 하여 프론트엔드 성능 최적화는 자연스레 후순위로 밀리게 되었습니다. 그리하여 3차 마일스톤에서는 프론트엔드 성능 개선을 목표로 설정하고, Lighthouse를 활용한 성능 개선 작업을 진행하였습니다.
+앞선 2차례의 마일스톤에서는 주요 기능 구현에 집중하느라 프론트엔드 성능 최적화는 자연스럽게 후순위로 밀리게 되었습니다. 서비스 고도화를 완료한 후, 유저 테스트를 통해 얻은 피드백을 반영하고 나서, Lighthouse를 사용해 사용자가 처음 마주하는 메인페이지의 성능을 측정했습니다. 그 결과 37점으로 확인되었고, 이에 3차 마일스톤에서는 페이지 성능 개선을 목표로 설정하여 Lighthouse를 활용한 성능 개선 작업을 진행하게 되었습니다.
+성능 개선 과정 중에 수정된 코드를 반영한 후 개발자 도구의 Lighthouse를 실행시켜 성능 지표를 확인하는 과정을 반복하게 되었습니다. 그리하여 이러한 반복적인 작업을 자동화할 필요성을 느끼게 되었고, Lighthouse CI와 GithubActions을 적용하여 자동화 환경을 구축하게 되었습니다.
+환경 구축 과정에서는 Lighthouse의 개념과 Core Web Vitals, 성능 세부 지표를 학습하고, Workflow 작성을 위해 GitHub Actions 사용법도 익혔습니다. 또한 기존에 비슷한 시행착오를 겪으신 분들의 글([Lighthouse CI 적용기 - GitHub Actions 만들기](https://iyu88.github.io/lighthouse/2022/11/20/lighthouse-ci.html), [Lighthouse CI를 알아보고 Github Actions에 적용하기](https://tech.kakaoent.com/front-end/2022/220602-lighthouse-with-github-actions/), [Lighthouse CI 적용](https://velog.io/@bae-sh/Lighthouse-CI-%EC%A0%81%EC%9A%A9#lighthousercjs), [쌈@뽕하게 Lighthouse 자동화하기](https://velog.io/@greencloud/%EC%8C%88%EB%BD%95%ED%95%98%EA%B2%8C-Lighthouse-%EC%9E%90%EB%8F%99%ED%99%94%ED%95%98%EA%B8%B0-ijcqk0uv#-lighthouse-%EA%B2%B0%EA%B3%BC-pr-comment%EB%A1%9C-%EB%8B%AC%EA%B8%B0))를 참고하여, 저의 프로젝트 환경에 맞게 코드와 설정을 수정하며 자동화 환경을 구축했습니다.
+이를 토대로 구축한 Lighthouse 성능 자동화 환경을 활용하여, 개발 생산성을 높이고 성능 이슈를 신속히 공유할 수 있었으며, 효과적으로 성능 개선 작업을 진행할 수 있었습니다.
 
-성능 개선 과정 중에 수정된 코드를 반영한 후 개발자 도구의 Lighthouse를 실행시켜 성능 지표를 확인하는 과정을 반복하게 되었습니다. 그리하여 이러한 반복적인 작업을 자동화할 필요성을 느끼게 되었고, Lighthouse CI를 적용하여 이를 자동화하는 환경을 구축하게 되었습니다.
+<b>[📎 Lighthouse를 활용한 성능 개선기](https://github.com/The-Memory-Of-Developer/dev-study/blob/main/projects/ludo/Lighthouse%EB%A5%BC%20%ED%99%9C%EC%9A%A9%ED%95%9C%20%EC%84%B1%EB%8A%A5%20%EA%B0%9C%EC%84%A0%EA%B8%B0.md)</b>
 
 ## 📓 Lighthouse
 
@@ -458,9 +460,7 @@ Mobile과 Desktop 환경별로 설정된 configuration 파일을 기반으로 Li
 
 ### 🤔Lighthouse CI를 활용한 웹 성능 측정 자동화 환경 구축 소감
 
-Lighthouse CI를 활용한 성능 측정 자동화 환경 구축 과정을 통해, 여러 중요한 기술을 익힐 수 있었습니다. GitHub Actions를 이용해 PR 생성 시 자동으로 Lighthouse 성능을 측정하고, 결과를 실시간으로 공유할 수 있게 되었습니다.
-Lighthouse CI를 설정하여 성능, 접근성, SEO, 베스트 프랙티스를 자동으로 점검하고, Octokit을 활용해 GitHub API와 연동하여 PR에 성능 보고서를 자동으로 PR Comment로 남길 수 있었습니다. 이러한 자동화된 성능 측정 시스템을 구축을 통해 성능 문제를 조기에 식별하고 대응할 수 있는 환경을 마련하게 되었고, 팀의 개발 효율성을 높이는 데 기여할 수 있었습니다.
-그러나 개발 서버와 배포 서버 간의 성능 차이가 발생하는 문제는 아쉬운 점으로 남았습니다. 개발 서버에서는 최적화가 덜 되어 있고, 로컬 환경에서의 성능 측정이 배포 환경과 다를 수 있기 때문입니다. 이를 해결하기 위해서는 배포 환경과 개발 환경을 최대한 유사하게 맞추거나, 두 환경에서 각각 성능을 측정하는 방법을 고려해야 할 필요가 있습니다. 이와 같은 문제점을 해결함으로써 성능 측정의 정확성을 높이고, 자동화된 성능 테스트 시스템을 더욱 효과적으로 활용할 수 있을 것입니다.
+기존에 비슷한 시행착오를 겪으신 분들의 글과 여러 공식문서를 참고하여 Ludo 프로젝트의 FE 파트에 Lighthouse CI를 활용한 성능 측정 자동화 환경을 구축할 수 있었습니다. GitHub Actions를 이용해 PR 생성 시 자동으로 Lighthouse 성능을 측정하고, 결과를 실시간으로 공유할 수 있게 되었습니다. 이러한 자동화된 성능 측정 시스템을 구축을 통해 성능 문제를 조기에 식별하고 대응할 수 있는 환경을 마련하게 되었고, 팀의 개발 효율성을 높이는 데 기여할 수 있었습니다. 개인적으로는 ighthouse, Core Web Vitals, Github Actions과 같은 자동화 환경 구축 및 성능 개선에 필요한 여러 지식과 기술을 학습할 수 있었습니다. <br>그러나 개발 서버와 배포 서버 간의 성능 차이가 발생하는 문제는 아쉬운 점으로 남았습니다. 개발 서버에서는 최적화가 덜 되어 있고, 로컬 환경에서의 성능 측정이 배포 환경과 다를 수 있기 때문입니다. 이를 해결하기 위해서는 배포 환경과 개발 환경을 최대한 유사하게 맞추거나, 두 환경에서 각각 성능을 측정하는 방법을 고려해야 할 필요가 있습니다. 이와 같은 문제점을 해결함으로써 성능 측정의 정확성을 높이고, 자동화된 성능 테스트 시스템을 더욱 효과적으로 활용할 수 있을 것입니다.
 
 ## 📓 References
 

@@ -30,7 +30,7 @@ Lighthouse 자동화 환경 구축을 진행한 경험을 작성한 글입니다
 
 앞선 2차례의 마일스톤에서는 주요 기능 구현에 집중하느라 프론트엔드 성능 최적화는 자연스럽게 후순위로 밀리게 되었습니다. 서비스 고도화를 완료한 후, 유저 테스트를 통해 얻은 피드백을 반영하고 나서, Lighthouse를 사용해 사용자가 처음 마주하는 메인페이지의 성능을 측정했습니다. 그 결과 37점으로 확인되었고, 이에 3차 마일스톤에서는 페이지 성능 개선을 목표로 설정하여 Lighthouse를 활용한 성능 개선 작업을 진행하게 되었습니다.
 성능 개선 과정 중에 수정된 코드를 반영한 후 개발자 도구의 Lighthouse를 실행시켜 성능 지표를 확인하는 과정을 반복하게 되었습니다. 그리하여 이러한 반복적인 작업을 자동화할 필요성을 느끼게 되었고, Lighthouse CI와 GithubActions을 적용하여 자동화 환경을 구축하게 되었습니다.
-환경 구축 과정에서는 Lighthouse의 개념과 Core Web Vitals, 성능 세부 지표를 학습하고, Workflow 작성을 위해 GitHub Actions 사용법도 익혔습니다. 또한 기존에 비슷한 시행착오를 겪으신 분들의 글([Lighthouse CI 적용기 - GitHub Actions 만들기](https://iyu88.github.io/lighthouse/2022/11/20/lighthouse-ci.html), [Lighthouse CI를 알아보고 Github Actions에 적용하기](https://tech.kakaoent.com/front-end/2022/220602-lighthouse-with-github-actions/), [Lighthouse CI 적용](https://velog.io/@bae-sh/Lighthouse-CI-%EC%A0%81%EC%9A%A9#lighthousercjs), [쌈@뽕하게 Lighthouse 자동화하기](https://velog.io/@greencloud/%EC%8C%88%EB%BD%95%ED%95%98%EA%B2%8C-Lighthouse-%EC%9E%90%EB%8F%99%ED%99%94%ED%95%98%EA%B8%B0-ijcqk0uv#-lighthouse-%EA%B2%B0%EA%B3%BC-pr-comment%EB%A1%9C-%EB%8B%AC%EA%B8%B0))를 참고하여, 저의 프로젝트 환경에 맞게 코드와 설정을 수정하며 자동화 환경을 구축했습니다.
+환경 구축 과정에서는 Lighthouse의 개념과 Core Web Vitals, 성능 세부 지표를 학습하고, Workflow 작성을 위해 GitHub Actions 사용법도 익혔습니다. 또한 기존에 비슷한 시행착오를 겪으신 분들의 글을 참고하여, 저의 프로젝트 환경에 맞게 코드와 설정을 수정하며 자동화 환경을 구축했습니다.
 이를 토대로 구축한 Lighthouse 성능 자동화 환경을 활용하여, 개발 생산성을 높이고 성능 이슈를 신속히 공유할 수 있었으며, 효과적으로 성능 개선 작업을 진행할 수 있었습니다.
 
 <b>[📎 Lighthouse를 활용한 성능 개선기](https://github.com/The-Memory-Of-Developer/dev-study/blob/main/projects/ludo/Lighthouse%EB%A5%BC%20%ED%99%9C%EC%9A%A9%ED%95%9C%20%EC%84%B1%EB%8A%A5%20%EA%B0%9C%EC%84%A0%EA%B8%B0.md)</b>

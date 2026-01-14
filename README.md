@@ -27,3 +27,5 @@
 ## 📚 Books
 
 ### [코어 JavaScript](https://github.com/The-Memory-Of-Developer/dev-study/tree/main/books/%EC%BD%94%EC%96%B4%20%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8)
+
+### [자바스크립트+리액트 디자인 패턴](https://github.com/The-Memory-Of-Developer/dev-study/tree/main/books/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%2B%EB%A6%AC%EC%95%A1%ED%8A%B8%20%EB%94%94%EC%9E%90%EC%9D%B8%20%ED%8C%A8%ED%84%B4)

@@ -18,11 +18,20 @@
 
 #### ✔︎ [FE Repository](https://github.com/JECT-Study/PICK-O-Client)
 
+### 💡 Kkebi Clinic, 상담사 전용 포털
+
+#### ✔︎ [KKEBI Clinic 작업 내역 (PR 목록)](https://github.com/The-Memory-Of-Developer/dev-study/blob/main/projects/kkebi-clinic/README.md)
+
 ### 💡 JS-SnakeGame, 뱀을 컨트롤하여 점수를 획득하는 게임
 
 #### ✔︎ [Repository](https://github.com/SungHyun627/JS-SnakeGame), [WebSite](https://sunghyun627.github.io/JS-SnakeGame/)
 
 - [snakegame 구현기](https://github.com/The-Memory-Of-Developer/dev-study/blob/main/projects/snakegame/snakegame%20%EA%B5%AC%ED%98%84%EA%B8%B0.md)
+
+## 📁 Open Source Contributions
+
+- [typescript-eslint](https://github.com/The-Memory-Of-Developer/dev-study/tree/main/open-source-contributions/typescript-eslint)
+- [React Korean Docs](https://github.com/The-Memory-Of-Developer/dev-study/tree/main/open-source-contributions/react-docs-ko)
 
 ## 📚 Books
 

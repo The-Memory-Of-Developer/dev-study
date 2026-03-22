@@ -1,4 +1,4 @@
-# bug: [no-useless-default-assignment] should report unnecessary default when field is present in both sides of ternary
+# fix(eslint-plugin): [no-useless-default-assignment] report unnecessary defaults in ternary expressions
 
 ## 링크
 

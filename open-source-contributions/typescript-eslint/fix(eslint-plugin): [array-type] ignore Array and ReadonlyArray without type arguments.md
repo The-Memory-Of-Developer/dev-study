@@ -42,17 +42,12 @@ declare module '2' {
 
 수정 파일: `packages/eslint-plugin/src/rules/array-type.ts`
 
-핵심 수정은 "이름 매칭 기반 판정"을 "스코프 인지 판정"으로 보강한 것입니다.
-
 ```ts
-// 요약 예시: 이름만 보고 처리하지 않고, 현재 스코프에서의 타입 식별자 해석 결과를 먼저 확인
-if (isArrayLikeIdentifier(typeRefName)) {
-  if (isShadowedInCurrentScope(typeRefName, context)) {
+// TSTypeReference
+for (let scope = context.sourceCode.getScope(node); scope.upper; scope = scope.upper) {
+  if (scope.set.has(node.typeName.name)) {
     return;
   }
-
-  // 전역 내장 Array/ReadonlyArray로 안전하게 판단되는 경우에만 기존 규칙 로직 적용
-  enforceArrayTypeStyle(typeReferenceNode);
 }
 ```
 
